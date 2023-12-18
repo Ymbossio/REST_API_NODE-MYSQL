@@ -4,8 +4,15 @@ import ruta from './index.route.js'
 
 const App = Express();
 
- App.use(routes);
- App.use(ruta)
+App.use(Express.json())
+
+App.use(routes);
+App.use(ruta)
+App.use((req, resp)=>{
+    return resp.status(404).json({
+        message: "Endpoint no encontrado"
+    })
+})
 
 
 App.listen(3000, ()=>{
